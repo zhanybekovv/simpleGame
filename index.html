@@ -47,11 +47,17 @@
             <button id="give-up" @click = "giveUp">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="logs.length > 0">
         <div class="small-12 columns">
-            <ul>
-                <li>
-
+            <ul v-for="log in logs">
+                <li v-if="log.isPlayer && log.heal" :class = "'player-turn-heal'">
+                    {{log.text}}
+                </li>
+                <li v-else-if="log.isPlayer" :class = "'player-turn'">
+                    {{log.text}}
+                </li>
+                <li v-else :class = "'monster-turn'">
+                    {{log.text}}
                 </li>
             </ul>
         </div>
